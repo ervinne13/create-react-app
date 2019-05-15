@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "jsx": "react",
+        "baseUrl": "./src",
+        "paths": {
+            "App/*": ["./src/application/*"],
+            "Domain/*": ["./src/domain/*"],
+            "Persistence/*": ["./src/persistence/*"]
+        }
+    },
+    "exclude": [ "node_modules", "dist" ]
+}

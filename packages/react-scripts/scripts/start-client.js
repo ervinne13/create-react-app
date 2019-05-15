@@ -19,8 +19,11 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
+const configPath = require('./utils/configPath');
+
 // Ensure environment variables are read.
-require('../config/env');
+require(configPath('env'));
+
 // @remove-on-eject-begin
 // Do the preflight check (only happens before eject).
 const verifyPackageTree = require('./utils/verifyPackageTree');
@@ -44,9 +47,9 @@ const {
   prepareUrls,
 } = require('react-dev-utils/WebpackDevServerUtils');
 const openBrowser = require('react-dev-utils/openBrowser');
-const paths = require('../config/paths');
-const configFactory = require('../config/webpack.config');
-const createDevServerConfig = require('../config/webpackDevServer.config');
+const paths = require(configPath('paths'));
+const configFactory = require(configPath('webpack.config'));
+const createDevServerConfig = require(configPath('webpackDevServer.config'));
 
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;

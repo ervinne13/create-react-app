@@ -14,11 +14,13 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
+const configPath = require('./utils/configPath');
+
 const fs = require('fs-extra');
 const path = require('path');
 const execSync = require('child_process').execSync;
 const chalk = require('react-dev-utils/chalk');
-const paths = require('../config/paths');
+const paths = require(configPath('paths'));
 const createJestConfig = require('./utils/createJestConfig');
 const inquirer = require('react-dev-utils/inquirer');
 const spawnSync = require('react-dev-utils/crossSpawn').sync;

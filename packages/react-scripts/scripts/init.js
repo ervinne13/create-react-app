@@ -95,10 +95,19 @@ module.exports = function(
 
   // Setup the script rules
   appPackage.scripts = {
-    start: 'react-scripts start',
-    build: 'react-scripts build',
-    test: 'react-scripts test',
-    eject: 'react-scripts eject',
+    "start": "NODE_ENV=development concurrently --kill-others-on-fail \"npm run server:start\" \"npm run client:start\"",
+    "clean": "rimraf dist",
+
+    "client:start": "react-scripts start-client",
+    "client:build": "react-scripts build-client",
+    "client:test": "react-scripts test-client",
+    "client:eject": 'react-scripts eject-client',
+
+    "server:start": "react-scripts start-server",
+    "server:prod": "node dist/application/server/bin/www",
+
+    "server:build": "babel src --ignore src/application/client --out-dir dist",
+    "server:deploy": "NODE_ENV=production npm-run-all clean server:build client:build server:prod",    
   };
 
   // Setup the eslint config
@@ -219,6 +228,13 @@ module.exports = function(
 
   console.log();
   console.log(`Success! Created ${appName} at ${appPath}`);
+
+  console.log(chalk.red('VERY IMPORTANT:'));
+  console.log('Create a .env file at the root of your project.');
+  console.log('  Use the guide below:');
+  console.log('  https://github.com/ervinne13/create-react-app/tree/master/packages/react-scripts');
+  console.log();
+
   console.log('Inside that directory, you can run several commands:');
   console.log();
   console.log(chalk.cyan(`  ${displayedCommand} start`));

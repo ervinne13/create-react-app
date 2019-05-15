@@ -19,8 +19,11 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
+const configPath = require('./utils/configPath');
+
 // Ensure environment variables are read.
-require('../config/env');
+require(configPath('env'));
+
 // @remove-on-eject-begin
 // Do the preflight checks (only happens before eject).
 const verifyPackageTree = require('./utils/verifyPackageTree');
@@ -35,8 +38,8 @@ const path = require('path');
 const chalk = require('react-dev-utils/chalk');
 const fs = require('fs-extra');
 const webpack = require('webpack');
-const configFactory = require('../config/webpack.config');
-const paths = require('../config/paths');
+const configFactory = require(configPath('webpack.config'));
+const paths = require(configPath('paths'));
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
